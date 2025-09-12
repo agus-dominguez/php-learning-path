@@ -42,9 +42,8 @@ class ExerciseController extends Controller
         // Eliminar archivo temporal
         Storage::disk('local')->delete($tempFile);
         
-        $message = $passed 
-            ? '¡Correcto! Has completado el ejercicio.' 
-            : 'Hmm, parece que hay algo incorrecto. Intenta de nuevo.';
+        // Eliminamos los mensajes de éxito o error
+        $message = '';
         
         return response()->json([
             'passed' => $passed,

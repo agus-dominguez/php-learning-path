@@ -6,8 +6,11 @@
         <div class="col-md-10">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>Ejercicio {{ $exercise->order }}: {{ $exercise->title }}</span>
-                    <a href="{{ route('exercises.index') }}" class="btn btn-sm btn-outline-secondary">Volver a la lista</a>
+                    <span>Ejercicio #{{ $exercise->id }}: {{ $exercise->title }}</span>
+                    <div>
+                        <button id="mark-completed" class="btn btn-sm btn-success me-2">Marcar como completado</button>
+                        <a href="{{ route('exercises.index') }}" class="btn btn-sm btn-outline-secondary">Volver a la lista</a>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -81,6 +84,36 @@
 <script>
     // Inicializar CodeMirror con un tiempo de espera para asegurar que todos los recursos estén cargados
     window.addEventListener('DOMContentLoaded', function() {
+        // Inicialización del botón de Marcar como completado
+        const markCompletedBtn = document.getElementById('mark-completed');
+        const exerciseId = '{{ $exercise->id }}';
+        
+        // Verificar si ya está marcado como completado
+        const completedExercises = JSON.parse(localStorage.getItem('completedExercises') || '{}');
+        if (completedExercises[exerciseId]) {
+            markCompletedBtn.textContent = "✓ Completado";
+            markCompletedBtn.classList.add('active');
+        }
+        
+        // Evento para marcar/desmarcar ejercicio como completado
+        markCompletedBtn.addEventListener('click', function() {
+            const completedExercises = JSON.parse(localStorage.getItem('completedExercises') || '{}');
+            
+            if (completedExercises[exerciseId]) {
+                // Si ya está marcado, lo desmarcamos
+                delete completedExercises[exerciseId];
+                markCompletedBtn.textContent = "Marcar como completado";
+                markCompletedBtn.classList.remove('active');
+            } else {
+                // Si no está marcado, lo marcamos
+                completedExercises[exerciseId] = true;
+                markCompletedBtn.textContent = "✓ Completado";
+                markCompletedBtn.classList.add('active');
+            }
+            
+            localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+        });
+        
         setTimeout(function() {
             try {
                 // Inicializar CodeMirror
@@ -137,6 +170,18 @@
                         
                         if (data.passed) {
                             testResult.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                            
+                            // Si el ejercicio pasa, preguntar si quiere marcarlo como completado
+                            if (!completedExercises[exerciseId]) {
+                                setTimeout(() => {
+                                    if (confirm('¡Ejercicio resuelto correctamente! ¿Deseas marcarlo como completado?')) {
+                                        completedExercises[exerciseId] = true;
+                                        localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+                                        markCompletedBtn.textContent = "✓ Completado";
+                                        markCompletedBtn.classList.add('active');
+                                    }
+                                }, 500);
+                            }
                         } else {
                             testResult.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
                         }
