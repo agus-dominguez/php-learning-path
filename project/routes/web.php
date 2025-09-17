@@ -25,9 +25,9 @@ Route::get('/alumnos', [AlumnosController::class, 'load'])->name('alumnos.index'
 Route::get('/profesores', [ProfesoresController::class, 'load'])->name('profesores.index');
 
 // Reciben información para crear
-Route::post('/clases', [ClasesController::class, 'store'])->name('clases.store');
-Route::post('/alumnos', [AlumnosController::class, 'store'])->name('alumnos.store');
-Route::post('/profesores', [ProfesoresController::class, 'store'])->name('profesores.store');
+Route::post('/clases/nueva', [ClasesController::class, 'store'])->name('clases.store');
+Route::post('/alumnos/nueva', [AlumnosController::class, 'store'])->name('alumnos.store');
+Route::post('/profesores/nueva', [ProfesoresController::class, 'store'])->name('profesores.store');
 
 Route::get('/', function () {
     return redirect()->route('dashboard');

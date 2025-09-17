@@ -19,4 +19,16 @@ final class AlumnosController extends Controller
         return view('alumnos.index');
         // return "Hola desde el Controlador de Alumnos";
     }
+
+    public function store()
+    {
+        $request = request();
+        $name = $request->input('nombre');
+        $description = $request->input('descripcion');
+        $hora = $request->input('hora');
+        $instructor = $request->input('instructor');
+        $estado = $request->input('estado');
+
+        return "Clase creada: $name - $description - Estado: $estado - Hora: $hora - Instructor: $instructor";
+    }
 }

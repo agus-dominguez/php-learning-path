@@ -79,11 +79,63 @@
                     </tbody>
                 </table>
             </div>
+            <div class="widget-footer">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newStudentModal">
+                        <i class="fa fa-plus"></i> Crear Nuevo Alumno
+                    </button>
+                </div>
+
+                <!-- Modal for creating a new alumn -->
+                <div class="modal fade" id="newStudentModal" tabindex="-1" aria-labelledby="newStudentModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newStudentModalLabel">Crear Nuevo Alumno</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{ route( 'alumnos.store') }}" method="POST">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="nombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="descripcion" class="form-label">Descripción</label>
+                                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3"
+                                            required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="instructor" class="form-label">Instructor</label>
+                                        <input type="text" class="form-control" id="instructor" name="instructor" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="fecha" class="form-label">Fecha y Hora</label>
+                                        <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="estado" class="form-label">Estado</label>
+                                        <select class="form-select" id="estado" name="estado" required>
+                                            <option value="1">Activa</option>
+                                            <option value="0">Inactiva</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             <div class="text-center">
-                <a href="/clases" class="btn btn-primary">Clases</a>
+                <a href="{{route('clases.index')}}" class="btn btn-primary">Clases</a>
             </div>
             <div class="text-center">
-                <a href="/profesores" class="btn btn-primary">Profesores</a>
+                <a href="{{route('profesores.index')}}" class="btn btn-primary">Profesores</a>
             </div>
         </div>
     </div>

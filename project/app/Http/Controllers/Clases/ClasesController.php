@@ -6,8 +6,7 @@ declare(strict_types=1);
 // definimos la ruta del controller
 namespace App\Http\Controllers\Clases;
 
-use Illuminate\Http\Request; // ← ¡Falta este import!
-
+use Illuminate\Http\Request;
 // importamos el controller base
 use App\Http\Controllers\Controller;
 
@@ -19,25 +18,18 @@ final class ClasesController extends Controller
     {
         // Accedemos a la vista resources/views/clases/index.blade.php
         return view('clases.index');
-        // return "Hola desde el Controlador de Clases";
     }
-    public function store(Request $request)
+
+    // método que maneja el formulario de creación de una nueva clase
+    public function store()
     {
-        // Validar los datos
-        $request->validate([
-            'nombre' => 'required|max:100',
-            'descripcion' => 'required'
-        ]);
+        $request = request();
+        $name = $request->input('nombre');
+        $description = $request->input('descripcion');
+        $hora = $request->input('hora');
+        $instructor = $request->input('instructor');
+        $estado = $request->input('estado');
 
-        // Aquí guardarías en la base de datos
-        // Por ahora solo mostramos lo recibido
-        return "¡Clase creada!<br>
-            Nombre: " . $request->nombre . "<br>
-            Descripción: " . $request->descripcion;
-
-        // Más adelante usarías:
-        // Clase::create($request->all());
-        // return redirect()->route('clases.index');
+        return "Clase creada: $name - $description - Estado: $estado - Hora: $hora - Instructor: $instructor";
     }
-
 }

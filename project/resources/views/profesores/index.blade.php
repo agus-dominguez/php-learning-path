@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Clases - ADM')
+@section('title', 'Profesores - ADM')
 
 @section('content')
 <div class="container mt-4">
-    <h1 class="mb-4">Listado de Clases</h1>
+    <h1 class="mb-4">Listado de Profesores</h1>
     
     <div class="card shadow-sm">
         <div class="card-body">
@@ -80,10 +80,10 @@
                 </table>
             </div>
             <div class="text-center">
-                <a href="/alumnos" class="btn btn-primary">Alumnos</a>
+                <a href="{{route('alumnos.index')}}" class="btn btn-primary">Alumnos</a>
             </div>
             <div class="text-center">
-                <a href="/clases" class="btn btn-primary">Clases</a>
+                <a href="{{route('clases.index')}}" class="btn btn-primary">Clases</a>
             </div>
         </div>
     </div>
