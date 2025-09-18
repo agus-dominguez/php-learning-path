@@ -22,63 +22,75 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Lucia Soardo</td>
-                            <td>Yoga y Pilates</td>
-                            <td>lucia.soardo@email.com</td>
-                            <td>+54 911 1234-5678</td>
-                            <td>
-                                <span class="badge bg-success">Activo</span>
-                            </td>
-                            <td>
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-edit"></i> Editar
-                                </a>
-                                <a href="#" class="btn btn-sm btn-info">
-                                    <i class="fas fa-eye"></i> Ver
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Ariel Diaz</td>
-                            <td>Crossfit y Funcional</td>
-                            <td>ariel.diaz@email.com</td>
-                            <td>+54 911 2345-6789</td>
-                            <td>
-                                <span class="badge bg-success">Activo</span>
-                            </td>
-                            <td>
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-edit"></i> Editar
-                                </a>
-                                <a href="#" class="btn btn-sm btn-info">
-                                    <i class="fas fa-eye"></i> Ver
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Agus Dominguez</td>
-                            <td>Zumba y Aeróbicos</td>
-                            <td>agus.dominguez@email.com</td>
-                            <td>+54 911 3456-7890</td>
-                            <td>
-                                <span class="badge bg-success">Activo</span>
-                            </td>
-                            <td>
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-edit"></i> Editar
-                                </a>
-                                <a href="#" class="btn btn-sm btn-info">
-                                    <i class="fas fa-eye"></i> Ver
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach ($profesores as $profesor)
+                                <tr>
+                                    <td>{{ $profesor->id }}</td>
+                                    <td>{{ $profesor->nombre }}</td>
+                                    <td>{{ $profesor->especialidad }}</td>
+                                    <td>{{ $profesor->email }}</td>
+                                    <td>{{ $profesor->telefono }}</td>
+                                    <td>{{ $profesor->estado }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-primary">Editar</a>
+                                        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                     </tbody>
                 </table>
             </div>
+            <div class="widget-footer">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newProfessorModal">
+                        <i class="fa fa-plus"></i> Crear Nuevo Profesor
+                    </button>
+                </div>
+
+                <!-- Modal for creating a new alumn -->
+                <div class="modal fade" id="newProfessorModal" tabindex="-1" aria-labelledby="newProfessorModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newProfessorModalLabel">Crear Nuevo Profesor</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{ route( 'profesores.store') }}" method="POST">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="nombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="descripcion" class="form-label">Descripción</label>
+                                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3"
+                                            required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="instructor" class="form-label">Instructor</label>
+                                        <input type="text" class="form-control" id="instructor" name="instructor" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="fecha" class="form-label">Fecha y Hora</label>
+                                        <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="estado" class="form-label">Estado</label>
+                                        <select class="form-select" id="estado" name="estado" required>
+                                            <option value="1">Activa</option>
+                                            <option value="0">Inactiva</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             <div class="text-center">
                 <a href="{{route('alumnos.index')}}" class="btn btn-primary">Alumnos</a>
             </div>

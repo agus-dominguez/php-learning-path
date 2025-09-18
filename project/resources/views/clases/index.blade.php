@@ -22,60 +22,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yoga Básico</td>
-                                <td>Clase introductoria de yoga para principiantes...</td>
-                                <td>María González</td>
-                                <td>15/06/2023 10:00</td>
-                                <td>
-                                    <span class="badge bg-success">Activa</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-info">
-                                        <i class="fas fa-eye"></i> Ver
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Pilates Intermedio</td>
-                                <td>Clase de pilates para nivel intermedio con...</td>
-                                <td>Juan Pérez</td>
-                                <td>16/06/2023 17:30</td>
-                                <td>
-                                    <span class="badge bg-success">Activa</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-info">
-                                        <i class="fas fa-eye"></i> Ver
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Spinning Avanzado</td>
-                                <td>Clase intensiva de spinning para nivel avanzado...</td>
-                                <td>Carlos Rodríguez</td>
-                                <td>17/06/2023 19:00</td>
-                                <td>
-                                    <span class="badge bg-danger">Inactiva</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-info">
-                                        <i class="fas fa-eye"></i> Ver
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach ($clases as $clase)
+                                <tr>
+                                    <td>{{ $clase->id }}</td>
+                                    <td>{{ $clase->nombre }}</td>
+                                    <td>{{ $clase->descripcion }}</td>
+                                    <td>{{ $clase->instructor }}</td>
+                                    <td>{{ $clase->hora }}</td>
+                                    <td>{{ $clase->estado }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-primary">Editar</a>
+                                        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -94,7 +54,7 @@
                                 <h5 class="modal-title" id="newClassModalLabel">Crear Nueva Clase</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="{{ route( 'clases.store') }}" method="POST">
+                            <form action="{{ route('clases.store') }}" method="POST">
                                 @csrf
                                 <div class="modal-body">
                                     <div class="mb-3">

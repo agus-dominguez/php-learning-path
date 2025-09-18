@@ -9,15 +9,23 @@ namespace App\Http\Controllers\Clases;
 use Illuminate\Http\Request;
 // importamos el controller base
 use App\Http\Controllers\Controller;
+use App\Models\Clase\ClaseModel;
 
 // extiende de controller para usar middlewares y otras funcionalidades como view
 final class ClasesController extends Controller
 {
-    // método que carga la vista de clases
+    private $clasesModel;
+
+    public function __construct(ClaseModel $claseModel)
+    {
+        $this->clasesModel = $claseModel;
+    }
+
     public function load()
     {
-        // Accedemos a la vista resources/views/clases/index.blade.php
-        return view('clases.index');
+        $clases = $this->clasesModel->getClases();
+
+        return view('clases.index', ['clases' => $clases]);
     }
 
     // método que maneja el formulario de creación de una nueva clase

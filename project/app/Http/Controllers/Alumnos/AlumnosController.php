@@ -8,17 +8,28 @@ namespace App\Http\Controllers\Alumnos;
 
 // importamos el controller base
 use App\Http\Controllers\Controller;
+use App\Models\AlumnoModel;
 
 // extiende de controller para usar middlewares y otras funcionalidades como view
 final class AlumnosController extends Controller
 {
-    // método que carga la vista de alumnos
+    private $alumnoModel;
+
+    public function __construct(AlumnoModel $alumnoModel)
+    {
+        $this->alumnoModel = $alumnoModel;
+    }
+
     public function load()
     {
-        // Accedemos a la vista resources/views/alumnos/index.blade.php
-        return view('alumnos.index');
-        // return "Hola desde el Controlador de Alumnos";
+        $clases = $this->alumnoModel->getAlumnos();
+
+        return view('alumnos.index', ['alumnos' => $clases]);
     }
+    // método que carga la vista de alumnos
+    // Accedemos a la vista resources/views/alumnos/index.blade.php
+    // return view('alumnos.index');
+    // return "Hola desde el Controlador de Alumnos";
 
     public function store()
     {
