@@ -27,4 +27,9 @@ class ProfessorModel extends Model
     {
         return $this->all();
     }
+
+    public function create(array $data)
+    {
+        return $this->insert($data);
+    }
 }

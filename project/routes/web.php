@@ -21,6 +21,10 @@ use App\Http\Controllers\Profesores\ProfesoresController;
 // Solo muestran información, no modifican nada
 // ✅ Sintaxis moderna (Laravel 8+)
 Route::get('/clases', [ClasesController::class, 'load'])->name('clases.index');
+Route::put('/clases', [ClasesController::class, 'cambiarEstado'])->name('clases.cambiar_estado');
+Route::get('/clases/activos', [ClasesController::class, 'getActivos'])->name('clases.activos');
+Route::get('/clases/inactivos', [ClasesController::class, 'getInactivos'])->name('clases.inactivos');
+Route::get('/clases/buscar', [ClasesController::class, 'Buscar'])->name('clases.buscar');
 Route::get('/alumnos', [AlumnosController::class, 'load'])->name('alumnos.index');
 Route::get('/profesores', [ProfesoresController::class, 'load'])->name('profesores.index');
 

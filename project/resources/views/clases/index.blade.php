@@ -31,7 +31,7 @@
                                     <td>{{ $clase->hora }}</td>
                                     <td>{{ $clase->estado }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-primary">Editar</a>
+                                        <a href="{{route( 'clases.cambiar_estado')}}" class="btn btn-sm btn-primary">Cambiar Estado</a>
                                         <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
                                     </td>
                                 </tr>
@@ -43,6 +43,10 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newClassModal">
                         <i class="fa fa-plus"></i> Crear Nueva Clase
                     </button>
+                    <a href="{{route('clases.index')}}" class="btn btn-primary">Mostrar Todos</a>
+                    <a href="{{route('clases.activos')}}" class="btn btn-primary">Mostrar Activos</a>
+                    <a href="{{route('clases.inactivos')}}" class="btn btn-primary">Mostrar Inactivos</a>
+                    <input type="number" name="id" placeholder="ID" onchange="location.href='{{ route('clases.buscar') }}?id='+value">
                 </div>
 
                 <!-- Modal for creating a new class -->
@@ -71,14 +75,14 @@
                                         <input type="text" class="form-control" id="instructor" name="instructor" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="fecha" class="form-label">Fecha y Hora</label>
-                                        <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+                                        <label for="hora" class="form-label">Hora</label>
+                                        <input type="time" class="form-control" id="hora" name="hora" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="estado" class="form-label">Estado</label>
                                         <select class="form-select" id="estado" name="estado" required>
-                                            <option value="1">Activa</option>
-                                            <option value="0">Inactiva</option>
+                                            <option value="1">activa</option>
+                                            <option value="0">inactiva</option>
                                         </select>
                                     </div>
                                 </div>

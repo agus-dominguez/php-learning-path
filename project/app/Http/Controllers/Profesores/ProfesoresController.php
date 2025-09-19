@@ -35,11 +35,26 @@ final class ProfesoresController extends Controller
     {
         $request = request();
         $name = $request->input('nombre');
-        $description = $request->input('descripcion');
-        $hora = $request->input('hora');
-        $instructor = $request->input('instructor');
+        $especialidad = $request->input('especialidad');
+        $email = $request->input('email');
+        $telefono = $request->input('telefono');
         $estado = $request->input('estado');
+        if ($estado == 1) {
+            $estado = 'activa';
+        } else {
+            $estado = 'inactiva';
+        }
 
-        return "Clase creada: $name - $description - Estado: $estado - Hora: $hora - Instructor: $instructor";
+        $this->profesorModel->create([
+            'nombre' => $name,
+            'especialidad' => $especialidad,
+            'email' => $email,
+            'telefono' => $telefono,
+            'estado' => $estado,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('profesores.index');
     }
 }

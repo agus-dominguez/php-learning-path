@@ -23,8 +23,13 @@ class AlumnoModel extends Model
     protected $fillable = [''];
 
 
-    public function getAlumnos()
+    // public function getAlumnos()
+    // {
+    //     return $this->all();
+    // }
+
+    public function create(array $data)
     {
-        return $this->all();
+        return $this->insert($data);
     }
 }

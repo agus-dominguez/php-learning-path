@@ -37,7 +37,53 @@ final class ClasesController extends Controller
         $hora = $request->input('hora');
         $instructor = $request->input('instructor');
         $estado = $request->input('estado');
+        if ($estado == 1) {
+            $estado = 'activa';
+        } else {
+            $estado = 'inactiva';
+        }
 
-        return "Clase creada: $name - $description - Estado: $estado - Hora: $hora - Instructor: $instructor";
+        $this->clasesModel->create([
+            'nombre' => $name,
+            'descripcion' => $description,
+            'hora' => $hora,
+            'instructor' => $instructor,
+            'estado' => $estado,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('clases.index');
+    }
+    public function getActivos()
+    {
+        $clases = $this->clasesModel->getActivos();
+
+        return view('clases.index', ['clases' => $clases]);
+    }
+    public function getInactivos()
+    {
+        $clases = $this->clasesModel->getInactivos();
+
+        return view('clases.index', ['clases' => $clases]);
+    }
+
+    public function Buscar(Request $request)
+    {
+        $id = $request->query('id');
+
+        $clase = $this->clasesModel->getClaseById((int)$id);
+
+        return view('clases.index', ['clases' => $clase ? [$clase] : []]);
+    }
+
+    public function cambiarEstado(Request $request)
+    {
+        $id = $request->input('id');
+        $newEstado = $request->input('estado');
+
+        $this->clasesModel->updateEstado((int)$id, $newEstado);
+
+        return redirect()->route('clases.index');
     }
 }

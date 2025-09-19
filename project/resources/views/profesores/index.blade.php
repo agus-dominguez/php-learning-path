@@ -62,17 +62,16 @@
                                         <input type="text" class="form-control" id="nombre" name="nombre" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="descripcion" class="form-label">Descripción</label>
-                                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3"
-                                            required></textarea>
+                                        <label for="especialidad" class="form-label">Especialidad</label>
+                                        <input type="text" class="form-control" id="especialidad" name="especialidad"required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="instructor" class="form-label">Instructor</label>
-                                        <input type="text" class="form-control" id="instructor" name="instructor" required>
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="text" class="form-control" id="email" name="email" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="fecha" class="form-label">Fecha y Hora</label>
-                                        <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+                                        <label for="telefono" class="form-label">Telefono</label>
+                                        <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]+" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="estado" class="form-label">Estado</label>

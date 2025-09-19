@@ -30,4 +30,28 @@ class ClaseModel extends Model
         return $this->all();
     }
 
+    public function create(array $data)
+    {
+        return $this->insert($data);
+    }
+
+    public function getActivos()
+    {
+        return $this->where('estado', 'activa')->get();
+    }
+
+    public function getInactivos()
+    {
+        return $this->where('estado', 'inactiva')->get();
+    }
+
+    public function getClaseById(int $id)
+    {
+        return $this->find($id);
+    }
+
+    public function updateEstado(int $id, string $newEstado)
+    {
+        return $this->where('id', $id)->update(['estado' => $newEstado, 'updated_at' => now()]);
+    }
 }
